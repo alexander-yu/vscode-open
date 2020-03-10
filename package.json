@@ -3,21 +3,50 @@
 	"displayName": "Open",
 	"description": "An extension for opening files",
 	"version": "0.0.1",
+	"publisher": "alexander-yu",
 	"engines": {
 		"vscode": "^1.43.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alexander-yu/vscode-open"
+	},
+	"homepage": "https://github.com/alexander-yu/vscode-open",
+	"bugs": {
+		"url": "https://github.com/alexander-yu/vscode-open/issues"
 	},
 	"categories": [
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
+	"keywords": [
+		"open",
+		"file",
+		"browser"
+	],
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "vscode-open.open",
+				"title": "Open: Open Current File"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "vscode-open.open",
+					"group": "navigation"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "vscode-open.open",
+				"key": "ctrl+alt+o",
+				"mac": "cmd+alt+o"
 			}
 		]
 	},
