@@ -5,19 +5,31 @@
 ## Features
 
 - Open files in your browser, using a file-to-URL mapping of your choice
-- Open pull requests for files in your browser, using a Git provider of your choice
+  - Available in editor/explorer context menus
+  - Default bindings:
+    - Windows/Unix: <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>O</kdb>
+    - Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>O</kdb>
 
-## Extension Settings
+- Open pull requests for selected lines in your browser, using a Git provider of your choice
+  - Specifically, this opens the pull request that was merged for the currently selected line (i.e. what would appear in `git blame`)
+  - Available in editor context menus
+  - Default bindings:
+    - Windows/Unix: <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>P</kdb>
+    - Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>P</kdb>
+
+## Configuration
 
 [comment]: # (TODO: More details about variables and setting formats)
 
 - **open.fileMappings**
-  - This configures a list of file mappings, where each mapping declares a filepath regex pattern and maps the matched filename to an output URL
+  - Type: `object[]`
+  - This configures a list of file mappings. Each mapping declares a filepath regex pattern that maps files to URLs.
 
 - **open.prMappings**
-  - This configures a list of file mappings for pull requests, where each mapping declares a filepath regex pattern and opens a pull request if the given file matches the pattern
+  - Type: `object[]`
+  - This configures a list of file mappings for pull requests. Each mapping declares a filepath regex pattern and opens pull requests for matched files.
 
-Example:
+**Example:**
 
 ```json
 {
@@ -38,7 +50,3 @@ Example:
     ]
 }
 ```
-
-## Release Notes
-
-- TODO
