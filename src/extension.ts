@@ -56,7 +56,7 @@ function open() {
 
 	const uri = editor.document.uri;
 	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
-	const mappings = config.get<Array<config.URIMapping>>('uriMappings') ?? [];
+	const mappings = config.get<Array<config.FileMapping>>('fileMappings') ?? [];
 
 	const context: variables.Context = {
 		env: process.env,

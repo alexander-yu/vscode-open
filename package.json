@@ -72,10 +72,10 @@
 			"type": "object",
 			"title": "Open",
 			"properties": {
-				"open.uriMappings": {
+				"open.fileMappings": {
 					"type": "array",
 					"default": [],
-					"description": "URI mappings"
+					"description": "File mappings"
 				},
 				"open.prMappings": {
 					"type": "array",

@@ -1,4 +1,4 @@
-export interface URIMapping {
+export interface FileMapping {
 	pattern: string,
 	output: string,
 }
