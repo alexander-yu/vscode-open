@@ -7,7 +7,7 @@ const REVISION_ID_REGEX = /^D[1-9]\d*$/im;
  * Extracts the revision ID from a commit message.
  *
  * @param message - Raw commit message to parse
- * @throws {Error} If there is a revision field but the value is invalid
+ * @throws {Error} If there is no revision field, or there is one but the value is invalid
  * @returns The revision ID
  */
 export function getRevisionID(message: string): string {
