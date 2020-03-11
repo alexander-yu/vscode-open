@@ -1,5 +1,7 @@
 const VARIABLE_REGEX = /\$\{(.*?)\}/g;
 
+// TODO (ayu): docstrings
+
 export interface Context {
     env: NodeJS.ProcessEnv,
     file: string,

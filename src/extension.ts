@@ -1,34 +1,67 @@
 import * as vscode from 'vscode';
+import * as config from './config';
+import * as git from './git';
 import * as variables from './variables';
 
 const EXTENSION = 'vscode-open';
 const EXTENSION_CONFIG_NAMESPACE = 'open';
 
-interface Mapping {
-	pattern: string,
-	output: string,
+// TODO (ayu): docstrings
+
+function getSelectedLines(editor: vscode.TextEditor): [number, number] {
+	const anchor = editor.selection.anchor.line + 1;
+	const active = editor.selection.active.line + 1;
+	const start = Math.min(anchor, active);
+	const end = Math.max(anchor, active);
+	return [start, end];
 }
 
-function getSelectedLines(): [number, number] | null {
+async function openPR() {
 	const editor = vscode.window.activeTextEditor;
-	if (editor) {
-		const anchor = editor.selection.anchor.line + 1;
-		const active = editor.selection.active.line + 1;
-		const start = Math.min(anchor, active);
-		const end = Math.max(anchor, active);
-		return [start, end];
+	if (!editor) {
+		return;
 	}
-	return null;
-}
 
-function open(uri: vscode.Uri) {
+	const uri = editor.document.uri;
 	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
-	const mappings = config.get<Array<Mapping>>('uriMappings') ?? [];
+	const mappings = config.get<Array<config.PRMapping>>('prMappings') ?? [];
 
 	const context: variables.Context = {
 		env: process.env,
 		file: uri.fsPath,
-		lines: getSelectedLines(),
+		lines: getSelectedLines(editor),
+		match: null,
+	};
+
+	for (const mapping of mappings)  {
+		const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
+		const match = pattern.exec(uri.fsPath);
+		if (match) {
+			context.match = match;
+			const line = editor.selection.active.line;
+			const pr = await git.getPullRequestURI(uri.fsPath, line, mapping.provider);
+			vscode.env.openExternal(pr);
+			return;
+		}
+	}
+
+	// TODO (ayu): handle no match
+}
+
+function open() {
+	const editor = vscode.window.activeTextEditor;
+	if (!editor) {
+		return;
+	}
+
+	const uri = editor.document.uri;
+	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
+	const mappings = config.get<Array<config.URIMapping>>('uriMappings') ?? [];
+
+	const context: variables.Context = {
+		env: process.env,
+		file: uri.fsPath,
+		lines: getSelectedLines(editor),
 		match: null,
 	};
 
@@ -38,29 +71,17 @@ function open(uri: vscode.Uri) {
 		if (match) {
 			context.match = match;
 			const output = variables.resolve(mapping.output, context);
-			vscode.env.openExternal(vscode.Uri.parse(output));
+			vscode.env.openExternal(vscode.Uri.parse(output, true));
+			return;
 		}
 	}
 
 	// TODO (ayu): handle no match
 }
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand(`${EXTENSION}.open`, () => {
-		let uri = vscode.window.activeTextEditor?.document.uri;
-
-		if (uri) {
-			open(uri);
-		}
-	});
-
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(vscode.commands.registerCommand(`${EXTENSION}.open`, open));
+	context.subscriptions.push(vscode.commands.registerCommand(`${EXTENSION}.openPR`, openPR));
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
