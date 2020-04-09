@@ -22,7 +22,7 @@ async function getBlameCommit(file: string, line: number): Promise<DefaultLogFie
     // TODO (ayu): catch errors
     const log = await simplegit(path.dirname(file)).log([
         '-L',
-        `${line},${line}:${file}`,
+        `${line + 1},${line + 1}:${file}`,  // Git blame line numbers start from 1
         '-n',
         '1',
         '--first-parent',
