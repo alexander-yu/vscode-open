@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as config from './config';
 import * as git from './git';
+import * as range from './range';
 import * as variables from './variables';
 
 const EXTENSION = 'vscode-open';
@@ -8,12 +9,12 @@ const EXTENSION_CONFIG_NAMESPACE = 'open';
 
 // TODO (ayu): docstrings
 
-function getSelectedLines(editor: vscode.TextEditor): [number, number] {
+function getSelectedLines(editor: vscode.TextEditor): range.Range {
 	const anchor = editor.selection.anchor.line + 1;
 	const active = editor.selection.active.line + 1;
 	const start = Math.min(anchor, active);
 	const end = Math.max(anchor, active);
-	return [start, end];
+	return new range.Range(start, end);
 }
 
 async function openPR() {

@@ -1,3 +1,5 @@
+import * as range from './range';
+
 const VARIABLE_REGEX = /\$\{(.*?)\}/g;
 
 const VARIABLE_HANDLERS = new Map<string, (context: Context, value: string, argument: string | undefined) => string>([
@@ -15,7 +17,7 @@ const REGEX_TEMPLATES = new Map<string, string>([
 
 export interface Context {
     env: NodeJS.ProcessEnv,
-    lines: [number, number] | null,
+    lines: range.Range | null,
     match: RegExpExecArray | null,
 }
 
@@ -50,10 +52,8 @@ function evaluateEditor(context: Context, value: string, variable: string | unde
         case 'lines':
             if (!context.lines) {
                 return '';
-            } else if (context.lines[0] === context.lines[1]) {
-                return `#${context.lines[0].toString()}`;
             }
-            return `#${context.lines[0].toString()}-${context.lines[1].toString()}`;
+            return context.lines.toFragment();
         default:
             throw new Error(`${variable} is not a valid editor variable.`);
     }
