@@ -36,13 +36,22 @@ function evaluate(value: string, variable: string, context: Context): string {
                 throw new Error(`${value} cannot be resolved because no regex capture group is given`);
             }
             return context.match.groups[argument];
-        case 'lines':
-            if (!context.lines) {
-                return '';
-            } else if (context.lines[0] === context.lines[1]) {
-                return `#${context.lines[0].toString()}`;
+        case 'editor':
+            if (!argument) {
+                throw new Error(`${value} cannot be resolved because no editor variable name is given.`);
             }
-            return `#${context.lines[0].toString()}-${context.lines[1].toString()}`;
+
+            switch (argument) {
+                case 'lines':
+                    if (!context.lines) {
+                        return '';
+                    } else if (context.lines[0] === context.lines[1]) {
+                        return `#${context.lines[0].toString()}`;
+                    }
+                    return `#${context.lines[0].toString()}-${context.lines[1].toString()}`;
+                default:
+                    throw new Error(`${argument} is not a valid editor variable.`);
+            }
         default:
             return value;
     }

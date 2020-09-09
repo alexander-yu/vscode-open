@@ -42,7 +42,7 @@
     "open.fileMappings": [
         {
             "pattern": "${env:REPO_PATH}/(?<file>.*)",
-            "output": "https://host.example.com/repo/${match:file}${lines}"
+            "output": "https://host.example.com/repo/${match:file}${editor:lines}"
         }
     ],
     "open.prMappings": [

@@ -14,3 +14,4 @@ export interface GitProvider {
 }
 
 // TODO (ayu): helpers for validating settings against interfaces
+// TODO (ayu): helpers for validating that files/URLs are valid

@@ -32,19 +32,23 @@ async function openPR() {
 		match: null,
 	};
 
-	for (const mapping of mappings)  {
-		const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
-		const match = pattern.exec(uri.fsPath);
-		if (match) {
-			context.match = match;
-			const line = editor.selection.active.line;
-			const pr = await git.getPullRequestURI(uri.fsPath, line, mapping.provider);
-			vscode.env.openExternal(pr);
-			return;
+	try {
+		for (const mapping of mappings)  {
+			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
+			const match = pattern.exec(uri.fsPath);
+			if (match) {
+				context.match = match;
+				const line = editor.selection.active.line;
+				const pr = await git.getPullRequestURI(uri.fsPath, line, mapping.provider);
+				vscode.env.openExternal(pr);
+				return;
+			}
 		}
-	}
 
-	// TODO (ayu): handle no match
+		// TODO (ayu): handle no match
+	} catch (error) {
+		vscode.window.showErrorMessage(error.message);
+	}
 }
 
 function openLines() {
@@ -63,18 +67,22 @@ function openLines() {
 		match: null,
 	};
 
-	for (const mapping of mappings)  {
-		const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
-		const match = pattern.exec(uri.fsPath);
-		if (match) {
-			context.match = match;
-			const output = variables.resolve(mapping.output, context);
-			vscode.env.openExternal(vscode.Uri.parse(output, true));
-			return;
+	try {
+		for (const mapping of mappings)  {
+			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
+			const match = pattern.exec(uri.fsPath);
+			if (match) {
+				context.match = match;
+				const output = variables.resolve(mapping.output, context);
+				vscode.env.openExternal(vscode.Uri.parse(output, true));
+				return;
+			}
 		}
-	}
 
-	// TODO (ayu): handle no match
+		// TODO (ayu): handle no match
+	} catch (error) {
+		vscode.window.showErrorMessage(error.message);
+	}
 }
 
 function open() {
@@ -93,18 +101,22 @@ function open() {
 		match: null,
 	};
 
-	for (const mapping of mappings)  {
-		const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
-		const match = pattern.exec(uri.fsPath);
-		if (match) {
-			context.match = match;
-			const output = variables.resolve(mapping.output, context);
-			vscode.env.openExternal(vscode.Uri.parse(output, true));
-			return;
+	try {
+		for (const mapping of mappings)  {
+			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
+			const match = pattern.exec(uri.fsPath);
+			if (match) {
+				context.match = match;
+				const output = variables.resolve(mapping.output, context);
+				vscode.env.openExternal(vscode.Uri.parse(output, true));
+				return;
+			}
 		}
-	}
 
-	// TODO (ayu): handle no match
+		// TODO (ayu): handle no match
+	} catch (error) {
+		vscode.window.showErrorMessage(error.message);
+	}
 }
 
 export function activate(context: vscode.ExtensionContext) {
