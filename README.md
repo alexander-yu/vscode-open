@@ -7,21 +7,21 @@
 - Open files in your browser, using a file-to-URL mapping of your choice
   - Available in editor/explorer context menus
   - Default bindings:
-    - Windows/Unix: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>O</kdb>
-    - Mac: <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>O</kdb>
+    - Windows/Unix: <kbd>Ctrl Alt O</kbd> + <kbd>O</kbd>
+    - Mac: <kbd>⌘⌥O</kbd> + <kbd>O</kbd>
 
 - Open files with selected lines in your browser, using a file-to-URL mapping of your choice
   - Available in editor/explorer context menus
   - Default bindings:
-    - Windows/Unix: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>L</kdb>
-    - Mac: <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>L</kdb>
+    - Windows/Unix: <kbd>Ctrl Alt O</kbd> + <kbd>L</kbd>
+    - Mac: <kbd>⌘⌥O</kbd> + <kbd>L</kbd>
 
 - Open pull requests for selected lines in your browser, using a Git provider of your choice
   - Specifically, this opens the pull request that was merged for the currently selected line (i.e. what would appear in `git blame`)
   - Available in editor context menus
   - Default bindings:
-    - Windows/Unix: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>P</kdb>
-    - Mac: <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>P</kdb>
+    - Windows/Unix: <kbd>Ctrl Alt O</kbd> + <kbd>P</kbd>
+    - Mac: <kbd>⌘⌥O</kbd> + <kbd>P</kbd>
 
 ## Configuration
 

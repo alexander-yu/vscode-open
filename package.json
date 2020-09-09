@@ -71,18 +71,18 @@
 		"keybindings": [
 			{
 				"command": "vscode-open.open",
-				"key": "ctrl+alt+o",
-				"mac": "cmd+alt+o"
+				"key": "ctrl+alt+o o",
+				"mac": "cmd+alt+o o"
 			},
 			{
 				"command": "vscode-open.openPR",
-				"key": "ctrl+alt+p",
-				"mac": "cmd+alt+p"
+				"key": "ctrl+alt+o p",
+				"mac": "cmd+alt+o p"
 			},
 			{
 				"command": "vscode-open.openLines",
-				"key": "ctrl+alt+l",
-				"mac": "cmd+alt+l"
+				"key": "ctrl+alt+o l",
+				"mac": "cmd+alt+o l"
 			}
 		],
 		"configuration": {
