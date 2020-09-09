@@ -48,7 +48,7 @@ async function openPR() {
 	// TODO (ayu): handle no match
 }
 
-function open() {
+function openLines() {
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
 		return;
@@ -79,9 +79,41 @@ function open() {
 	// TODO (ayu): handle no match
 }
 
+function open() {
+	const editor = vscode.window.activeTextEditor;
+	if (!editor) {
+		return;
+	}
+
+	const uri = editor.document.uri;
+	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
+	const mappings = config.get<Array<config.FileMapping>>('fileMappings') ?? [];
+
+	const context: variables.Context = {
+		env: process.env,
+		file: uri.fsPath,
+		lines: null,
+		match: null,
+	};
+
+	for (const mapping of mappings)  {
+		const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
+		const match = pattern.exec(uri.fsPath);
+		if (match) {
+			context.match = match;
+			const output = variables.resolve(mapping.output, context);
+			vscode.env.openExternal(vscode.Uri.parse(output, true));
+			return;
+		}
+	}
+
+	// TODO (ayu): handle no match
+}
+
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand(`${EXTENSION}.open`, open));
 	context.subscriptions.push(vscode.commands.registerCommand(`${EXTENSION}.openPR`, openPR));
+	context.subscriptions.push(vscode.commands.registerCommand(`${EXTENSION}.openLines`, openLines));
 }
 
 export function deactivate() {}

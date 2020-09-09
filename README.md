@@ -10,6 +10,12 @@
     - Windows/Unix: <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>O</kdb>
     - Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>O</kdb>
 
+- Open files with selected lines in your browser, using a file-to-URL mapping of your choice
+  - Available in editor/explorer context menus
+  - Default bindings:
+    - Windows/Unix: <kbd>Alt</kbd> + <kbd>Ctrl</kbd> + <kbd>L</kdb>
+    - Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>L</kdb>
+
 - Open pull requests for selected lines in your browser, using a Git provider of your choice
   - Specifically, this opens the pull request that was merged for the currently selected line (i.e. what would appear in `git blame`)
   - Available in editor context menus

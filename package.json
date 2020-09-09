@@ -36,12 +36,20 @@
 			{
 				"command": "vscode-open.openPR",
 				"title": "Open: Open Pull Request for Current Line"
+			},
+			{
+				"command": "vscode-open.openLines",
+				"title": "Open: Open Current File with Selected Lines"
 			}
 		],
 		"menus": {
 			"explorer/context": [
 				{
 					"command": "vscode-open.open",
+					"group": "navigation"
+				},
+				{
+					"command": "vscode-open.openLines",
 					"group": "navigation"
 				}
 			],
@@ -52,6 +60,10 @@
 				},
 				{
 					"command": "vscode-open.openPR",
+					"group": "navigation"
+				},
+				{
+					"command": "vscode-open.openLines",
 					"group": "navigation"
 				}
 			]
@@ -66,6 +78,11 @@
 				"command": "vscode-open.openPR",
 				"key": "ctrl+alt+p",
 				"mac": "cmd+alt+p"
+			},
+			{
+				"command": "vscode-open.openLines",
+				"key": "ctrl+alt+l",
+				"mac": "cmd+alt+l"
 			}
 		],
 		"configuration": {
