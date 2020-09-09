@@ -1,6 +1,6 @@
 import * as range from './range';
 
-const VARIABLE_REGEX = /\$\{(.*?)\}/g;
+const VARIABLE_REGEX = /\$\{(.+?)\}/g;
 
 const VARIABLE_HANDLERS = new Map<string, (context: Context, value: string, argument: string | undefined) => string>([
     ['env', evaluateEnv],
@@ -10,7 +10,8 @@ const VARIABLE_HANDLERS = new Map<string, (context: Context, value: string, argu
 ]);
 
 const REGEX_TEMPLATES = new Map<string, string>([
-    ['file', '.*'],
+    ['file', '.+'],
+    ['lines', '#[0-9]+(-[0-9]+)?'],
 ]);
 
 // TODO (ayu): docstrings

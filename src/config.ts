@@ -3,6 +3,11 @@ export interface FileMapping {
 	output: string,
 }
 
+export interface URIMapping {
+	pattern: string,
+	output: string,
+}
+
 export interface PRMapping {
 	pattern: string,
 	provider: GitProvider,
@@ -14,4 +19,4 @@ export interface GitProvider {
 }
 
 // TODO (ayu): helpers for validating settings against interfaces
-// TODO (ayu): helpers for validating that files/URLs are valid
+// TODO (ayu): helpers for validating that files/URIs are valid
