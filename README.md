@@ -41,7 +41,7 @@
 {
     "open.fileMappings": [
         {
-            "pattern": "${env:REPO_PATH}/(?<file>.*)",
+            "pattern": "${env:REPO_PATH}/${regex:file}",
             "output": "https://host.example.com/repo/${match:file}${editor:lines}"
         }
     ],

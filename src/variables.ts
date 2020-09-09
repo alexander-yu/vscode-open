@@ -1,4 +1,5 @@
 const VARIABLE_REGEX = /\$\{(.*?)\}/g;
+const FILE_REGEX_STR = '.*';
 
 // TODO (ayu): docstrings
 
@@ -52,6 +53,22 @@ function evaluate(value: string, variable: string, context: Context): string {
                 default:
                     throw new Error(`${argument} is not a valid editor variable.`);
             }
+        case 'regex':
+            if (!argument) {
+                throw new Error(`${value} cannot be resolved because no regex template name is given.`);
+            }
+
+            let regex = null;
+
+            switch (argument) {
+                case 'file':
+                    regex = FILE_REGEX_STR;
+                    break;
+                default:
+                    throw new Error(`${argument} is not a valid regex template.`);
+            }
+
+            return `(?<${argument}>${regex})`;
         default:
             return value;
     }
