@@ -28,7 +28,6 @@ async function openPR() {
 
 	const context: variables.Context = {
 		env: process.env,
-		file: uri.fsPath,
 		lines: getSelectedLines(editor),
 		match: null,
 	};
@@ -60,7 +59,6 @@ function openLines() {
 
 	const context: variables.Context = {
 		env: process.env,
-		file: uri.fsPath,
 		lines: getSelectedLines(editor),
 		match: null,
 	};
@@ -91,7 +89,6 @@ function open() {
 
 	const context: variables.Context = {
 		env: process.env,
-		file: uri.fsPath,
 		lines: null,
 		match: null,
 	};

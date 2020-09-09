@@ -4,7 +4,6 @@ const VARIABLE_REGEX = /\$\{(.*?)\}/g;
 
 export interface Context {
     env: NodeJS.ProcessEnv,
-    file: string,
     lines: [number, number] | null,
     match: RegExpExecArray | null,
 }
@@ -41,9 +40,9 @@ function evaluate(value: string, variable: string, context: Context): string {
             if (!context.lines) {
                 return '';
             } else if (context.lines[0] === context.lines[1]) {
-                return context.lines[0].toString();
+                return `#${context.lines[0].toString()}`;
             }
-            return `${context.lines[0].toString()}-${context.lines[1].toString()}`;
+            return `#${context.lines[0].toString()}-${context.lines[1].toString()}`;
         default:
             return value;
     }
