@@ -3,5 +3,6 @@
     "line-length": false,
     "no-inline-html": {
       "allowed_elements": ["kbd"]
-    }
+    },
+    "no-duplicate-header": false
 }
