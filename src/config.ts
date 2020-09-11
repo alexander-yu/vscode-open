@@ -1,11 +1,13 @@
 export interface FileMapping {
 	pattern: string,
 	output: string,
+	lineSeparator?: string,
 }
 
 export interface URIMapping {
 	pattern: string,
 	output: string,
+	lineSeparator?: string,
 }
 
 export interface PRMapping {

@@ -58,7 +58,8 @@ See the [release notes](https://github.com/alexander-yu/vscode-open/blob/master/
     "open.fileMappings": [
         {
             "pattern": "${env:REPO_PATH}/${regex:file}",
-            "output": "https://host.example.com/repo/${match:file}${editor:lines}"
+            "output": "https://host.example.com/repo/${match:file}${editor:lines}",
+            "lineSeparator": "#"
         }
     ],
     "open.prMappings": [
@@ -73,7 +74,8 @@ See the [release notes](https://github.com/alexander-yu/vscode-open/blob/master/
     "open.uriMappings": [
         {
             "pattern": "https://host.example.com/repo/${regex:file}${regex:lines}",
-            "output": "${env:REPO_PATH}/${match:file}${match:lines}"
+            "output": "${env:REPO_PATH}/${match:file}${match:lines}",
+            "lineSeparator": "#"
         }
     ]
 }

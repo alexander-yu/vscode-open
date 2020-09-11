@@ -1,4 +1,5 @@
-import * as range from './range';
+import { Context } from './context';
+import { getRegex } from './regex';
 
 const VARIABLE_REGEX = /\$\{(.+?)\}/g;
 
@@ -9,18 +10,7 @@ const VARIABLE_HANDLERS = new Map<string, (context: Context, value: string, argu
     ['regex', evaluateRegex],
 ]);
 
-const REGEX_TEMPLATES = new Map<string, string>([
-    ['file', '.+'],
-    ['lines', '#[0-9]+(-[0-9]+)?'],
-]);
-
 // TODO (ayu): docstrings
-
-export interface Context {
-    env: NodeJS.ProcessEnv,
-    lines: range.Range | null,
-    match: RegExpExecArray | null,
-}
 
 function evaluateEnv(context: Context, value: string, variable: string | undefined): string {
     if (!variable) {
@@ -54,22 +44,17 @@ function evaluateEditor(context: Context, value: string, variable: string | unde
             if (!context.lines) {
                 return '';
             }
-            return context.lines.toFragment();
+            return context.lines.toFragment(context.lineSeparator);
         default:
             throw new Error(`${variable} is not a valid editor variable.`);
     }
 }
 
-function evaluateRegex(_: Context, value: string, template: string | undefined): string {
+function evaluateRegex(context: Context, value: string, template: string | undefined): string {
     if (!template) {
         throw new Error(`${value} cannot be resolved because no regex template name is given.`);
     }
-
-    const regex = REGEX_TEMPLATES.get(template);
-    if (!regex) {
-        throw new Error(`${template} is not a valid regex template.`);
-    }
-
+    const regex = getRegex(context, template);
     return `(?<${template}>${regex})`;
 }
 
