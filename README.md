@@ -1,6 +1,12 @@
 # vscode-open
 
-> A VSCode extension for opening files
+[![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/alexander-yu.vscode-open.svg)](https://marketplace.visualstudio.com/items?itemName=alexander-yu.vscode-open) [![GitHub license](https://img.shields.io/github/license/alexander-yu/vscode-open.svg)](https://github.com/alexander-yu/vscode-open/blob/master/LICENSE)
+
+This is a [Visual Studio Code](https://code.visualstudio.com/) extension for opening files in your browser, or vice versa.
+
+The main purpose of this extension is to be able to seamlessly move between your editor and the SCM/code review provider in your browser. You can open files or pull requests in your browser based off of selected lines in your editor, or conversely open a file in your editor from a given URI.
+
+See the [release notes](https://github.com/alexander-yu/vscode-open/blob/master/CHANGELOG.md) for the list of recent changes.
 
 ## Features
 
