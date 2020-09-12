@@ -4,7 +4,8 @@
 
 ### Added
 
-- Added new setting to file and URI mappings to configure the line separator used for generating `${editor:lines}` and `${regex:lines}`; when opening files from a URI, the extension will respect the configured line separator when extracting line numbers
+- Added a setting to file and URI mappings to configure the line separator used for generating `${editor:lines}` and `${regex:lines}`; when opening files from a URI, the extension will respect the configured line separator when extracting line numbers
+- Error messages are now surfaced for invalid settings
 
 ## 0.1.0 - 2020-09-10
 
