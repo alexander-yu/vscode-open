@@ -31,7 +31,7 @@ async function getBlameCommit(file: string, line: number): Promise<DefaultLogFie
     return log.latest;
 }
 
-export async function getPullRequestURI(file: string, line: number, provider: config.GitProvider): Promise<vscode.Uri> {
+export async function getPullRequestURI(file: string, line: number, provider: config.GitProviderType): Promise<vscode.Uri> {
     const commit = await getBlameCommit(file, line);
 
     switch (provider.type) {

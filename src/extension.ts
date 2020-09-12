@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
+
 import * as config from './config';
-import { Context} from './context';
+import { Context } from './context';
 import * as git from './git';
 import * as range from './range';
 import * as variables from './variables';
@@ -24,13 +25,11 @@ async function openPR() {
 		return;
 	}
 
-	const uri = editor.document.uri;
-	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
-	const mappings = config.get<Array<config.PRMapping>>('prMappings') ?? [];
-
-	const context = new Context({ lines: getSelectedLines(editor) });
-
 	try {
+		const uri = editor.document.uri;
+		const mappings = config.getMappings<config.PRMappingType>('prMappings');
+		const context = new Context({ lines: getSelectedLines(editor) });
+
 		for (const mapping of mappings)  {
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 			const match = pattern.exec(uri.fsPath);
@@ -55,13 +54,11 @@ function openLines() {
 		return;
 	}
 
-	const uri = editor.document.uri;
-	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
-	const mappings = config.get<Array<config.FileMapping>>('fileMappings') ?? [];
-
-	const context = new Context({ lines: getSelectedLines(editor) });
-
 	try {
+		const uri = editor.document.uri;
+		const mappings = config.getMappings<config.FileMappingType>('fileMappings');
+		const context = new Context({ lines: getSelectedLines(editor) });
+
 		for (const mapping of mappings)  {
 			if (mapping.lineSeparator) {
 				context.lineSeparator = mapping.lineSeparator;
@@ -89,13 +86,11 @@ function open() {
 		return;
 	}
 
-	const uri = editor.document.uri;
-	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
-	const mappings = config.get<Array<config.FileMapping>>('fileMappings') ?? [];
-
-	const context = new Context({});
-
 	try {
+		const uri = editor.document.uri;
+		const mappings = config.getMappings<config.FileMappingType>('fileMappings');
+		const context = new Context({});
+
 		for (const mapping of mappings)  {
 			if (mapping.lineSeparator) {
 				context.lineSeparator = mapping.lineSeparator;
@@ -123,12 +118,10 @@ async function openURI() {
 		return;
 	}
 
-	const config = vscode.workspace.getConfiguration(`${EXTENSION_CONFIG_NAMESPACE}`);
-	const mappings = config.get<Array<config.URIMapping>>('uriMappings') ?? [];
-
-	const context = new Context({});
-
 	try {
+		const mappings = config.getMappings<config.URIMappingType>('uriMappings');
+		const context = new Context({});
+
 		const uri = await vscode.window.showInputBox({
 			placeHolder: 'https://host.example.com/repo/file#1-3',
 			prompt: 'Enter URI to open file for',
