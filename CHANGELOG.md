@@ -4,7 +4,7 @@
 
 ### Fixed
 
-- `lineSeparator` is escaped properly when used as part `${regex:lines}`
+- `lineSeparator` is escaped properly when used as part of `${regex:lines}`
 
 ## 0.1.4 - 2020-09-11
 
