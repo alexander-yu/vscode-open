@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.1.5 - 2020-09-11
+
+### Fixed
+
+- `lineSeparator` is escaped properly when used as part `${regex:lines}`
+
 ## 0.1.4 - 2020-09-11
 
 ### Added

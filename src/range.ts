@@ -1,3 +1,5 @@
+import * as regex from './regex';
+
 const SINGLE_LINE_REGEX = '(?<line>[0-9]+)$';
 const MULTI_LINE_REGEX = '(?<start>[0-9]+)-(?<end>[0-9]+)$';
 
@@ -24,12 +26,12 @@ export function extractRangeFromURI(lineSeparator: string, uri: string): [string
     let range: Range | null = null;
     let match: RegExpExecArray | null = null;
 
-    match = RegExp(lineSeparator + SINGLE_LINE_REGEX).exec(uri);
+    match = RegExp(regex.escapeRegex(lineSeparator) + SINGLE_LINE_REGEX).exec(uri);
     if (match && match.groups) {
         const line = parseInt(match.groups['line'], 10);
         range = new Range(line, line);
     } else {
-        match = RegExp(lineSeparator + MULTI_LINE_REGEX).exec(uri);
+        match = RegExp(regex.escapeRegex(lineSeparator) + MULTI_LINE_REGEX).exec(uri);
         if (match && match.groups) {
             const start = parseInt(match.groups['start'], 10);
             const end = parseInt(match.groups['end'], 10);

@@ -5,6 +5,10 @@ const REGEX_TEMPLATES = new Map<string, string>([
     ['lines', '[0-9]+(-[0-9]+)?'],
 ]);
 
+export function escapeRegex(value: string): string {
+    return value.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');  // $& means the whole matched string
+}
+
 export function getRegex(context: Context, template: string): string {
     let regex = REGEX_TEMPLATES.get(template);
     if (!regex) {
@@ -12,7 +16,7 @@ export function getRegex(context: Context, template: string): string {
     }
 
     if (template === 'lines' && context.lineSeparator) {
-        regex = context.lineSeparator + regex;
+        regex = escapeRegex(context.lineSeparator) + regex;
     }
 
     return regex;
