@@ -16,8 +16,13 @@ function evaluateEnv(context: Context, value: string, variable: string | undefin
     if (!variable) {
         throw new Error(`${value} cannot be resolved because no environment variable name is given.`);
     }
+
     const env = context.env[variable];
-    return (typeof env === 'string') ? env : '';
+    if (env === undefined) {
+        throw new Error(`Environment variable ${variable} does not exist`);
+    }
+
+    return env;
 }
 
 function evaluateMatch(context: Context, value: string, group: string | undefined): string {
