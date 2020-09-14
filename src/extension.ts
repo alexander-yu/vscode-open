@@ -7,7 +7,6 @@ import * as range from './range';
 import * as variables from './variables';
 
 const EXTENSION = 'vscode-open';
-const EXTENSION_CONFIG_NAMESPACE = 'open';
 
 // TODO (ayu): docstrings
 
