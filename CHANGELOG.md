@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.1.9 - 2020-09-14
+
+### Added
+
+- Added support for parsing GitHub line numbers (e.g. `L123-L124`) as part of the `${regex:lines}` variable; when opening files from a URI, the extension will similarly be able to respect GitHub line numbers
+
 ## 0.1.8 - 2020-09-14
 
 ### Fixed

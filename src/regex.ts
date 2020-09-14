@@ -1,23 +1,28 @@
 import { Context } from './context';
+import * as range from './range';
 
-const REGEX_TEMPLATES = new Map<string, string>([
+const REGEX_TEMPLATES = new Set<string>(['file', 'lines']);
+const STRING_REGEX_TEMPLATES = new Map<string, string>([
     ['file', '.+'],
-    ['lines', '[0-9]+(-[0-9]+)?'],
 ]);
 
-export function escapeRegex(value: string): string {
-    return value.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');  // $& means the whole matched string
-}
-
 export function getRegex(context: Context, template: string): string {
-    let regex = REGEX_TEMPLATES.get(template);
-    if (!regex) {
+    if (!REGEX_TEMPLATES.has(template)) {
         throw new Error(`${template} is not a valid regex template.`);
     }
 
     if (template === 'lines' && context.lineSeparator) {
-        regex = escapeRegex(context.lineSeparator) + regex;
+        return range.REGEXES.map(
+            regex => regex.toRegex(context.lineSeparator)
+        ).map(
+            regex => `(?:${regex})`
+        ).join('|');
     }
 
-    return regex;
+    const string_template = STRING_REGEX_TEMPLATES.get(template);
+    if (string_template) {
+        return string_template;
+    }
+
+    throw new Error(`Internal error: regex template ${template} is not currently supported`);
 }

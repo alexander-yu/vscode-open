@@ -1,8 +1,41 @@
 import * as regex from './regex';
 
-const LINE_REGEX = '(?<start>[0-9]+)(?:-(?<end>[0-9]+)$)?';
-
 // TODO (ayu): docstrings
+
+class RangeRegex {
+    lineRegex: string;
+    linePrefix: string;
+
+    constructor(lineRegex: string, linePrefix: string) {
+        this.lineRegex = lineRegex;
+        this.linePrefix = linePrefix || '';
+    }
+
+    toRegex(lineSeparator: string, captureGroups: boolean = false): string {
+        if (captureGroups) {
+            return (
+                `${escapeRegex(lineSeparator)}` +
+                `${this.linePrefix}(?<start>${this.lineRegex})` +
+                `(?:-${this.linePrefix}(?<end>${this.lineRegex}))?$`
+            );
+        }
+        return (
+            `${escapeRegex(lineSeparator)}` +
+            `${this.linePrefix}${this.lineRegex}` +
+            `(?:-${this.linePrefix}${this.lineRegex})?`
+        );
+    }
+}
+
+function escapeRegex(value: string): string {
+    return value.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');  // $& means the whole matched string
+}
+
+export const REGEXES : RangeRegex[] = [
+    new RangeRegex('[0-9]+', ''),
+    // e.g. for GitHub, where line numbers are of the form L123-124 instead of 123-124
+    new RangeRegex('[0-9]+', 'L'),
+];
 
 export class Range {
     start: number;
@@ -25,7 +58,13 @@ export function extractRangeFromURI(lineSeparator: string, uri: string): [string
     let range: Range | null = null;
     let match: RegExpExecArray | null = null;
 
-    match = RegExp(regex.escapeRegex(lineSeparator) + LINE_REGEX).exec(uri);
+    for (const regex of REGEXES) {
+        match = RegExp(regex.toRegex(lineSeparator, true)).exec(uri);
+        if (match) {
+            break;
+        }
+    }
+
     if (match && match.groups) {
         const start = match.groups['start'];
         const end = match.groups['end'] || start;
