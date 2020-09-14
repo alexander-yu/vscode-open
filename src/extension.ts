@@ -42,7 +42,7 @@ async function openPR() {
 			}
 		}
 
-		// TODO (ayu): handle no match
+		throw new Error(`${uri.fsPath} did not match any PR mappings`);
 	} catch (error) {
 		vscode.window.showErrorMessage(error.message);
 	}
@@ -74,7 +74,7 @@ function openLines() {
 			}
 		}
 
-		// TODO (ayu): handle no match
+		throw new Error(`${uri.fsPath} did not match any file mappings`);
 	} catch (error) {
 		vscode.window.showErrorMessage(error.message);
 	}
@@ -106,7 +106,7 @@ function open() {
 			}
 		}
 
-		// TODO (ayu): handle no match
+		throw new Error(`${uri.fsPath} did not match any file mappings`);
 	} catch (error) {
 		vscode.window.showErrorMessage(error.message);
 	}
@@ -150,7 +150,7 @@ async function openURI() {
 				}
 			}
 
-			// TODO (ayu): handle no match
+			throw new Error(`${uri} did not match any URI mappings`);
 		}
 	} catch (error) {
 		vscode.window.showErrorMessage(error.message);

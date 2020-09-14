@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.1.8 - 2020-09-14
+
+### Fixed
+
+- Improved error messaging for invalid environment variables and when file paths/URIs fail to match any known mappings
+
 ## 0.1.7 - 2020-09-14
 
 ### Fixed
