@@ -113,11 +113,6 @@ function open() {
 }
 
 async function openURI() {
-	const editor = vscode.window.activeTextEditor;
-	if (!editor) {
-		return;
-	}
-
 	try {
 		const mappings = config.getMappings<config.URIMappingType>('uriMappings');
 		const context = new Context({});
