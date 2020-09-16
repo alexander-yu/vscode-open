@@ -1,5 +1,23 @@
 # Change Log
 
+## 0.1.10 - 2020-09-16
+
+### Added
+
+- Added a set of new editor variables, in order to increase parity with the [VSCode variables](https://code.visualstudio.com/docs/editor/variables-reference) that are available in VSCode's own configuration files; in particular, added the following:
+
+  |Variable|Description|
+  |--------|-----------|
+  |`${editor:workspaceFolder}`|The path of the folder opened in VS Code|
+  |`${editor:workspaceFolderBasename}`|The name of the folder opened in VS Code without any slashes (/)|
+  |`${editor:file}`|The current opened file|
+  |`${editor:relativeFile}`|The current opened file relative to workspaceFolder|
+  |`${editor:relativeFileDirname}`|The current opened file's dirname relative to workspaceFolder|
+  |`${editor:fileBasename}`|The current opened file's basename|
+  |`${editor:fileBasenameNoExtension}`|The current opened file's basename with no file extension|
+  |`${editor:fileDirname}`|The current opened file's dirname|
+  |`${editor:fileExtname}`|The current opened file's extension|
+
 ## 0.1.9 - 2020-09-14
 
 ### Added

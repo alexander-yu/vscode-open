@@ -1,4 +1,5 @@
 import { Context } from './context';
+import { evaluateEditor } from './editor';
 import { getRegex } from './regex';
 
 const VARIABLE_REGEX = /\$\{(.+?)\}/g;
@@ -14,7 +15,7 @@ const VARIABLE_HANDLERS = new Map<string, (context: Context, value: string, argu
 
 function evaluateEnv(context: Context, value: string, variable: string | undefined): string {
     if (!variable) {
-        throw new Error(`${value} cannot be resolved because no environment variable name is given.`);
+        throw new Error(`${value} cannot be resolved because no environment variable name is given`);
     }
 
     const env = context.env[variable];
@@ -39,25 +40,9 @@ function evaluateMatch(context: Context, value: string, group: string | undefine
     return context.match.groups[group];
 }
 
-function evaluateEditor(context: Context, value: string, variable: string | undefined): string {
-    if (!variable) {
-        throw new Error(`${value} cannot be resolved because no editor variable name is given.`);
-    }
-
-    switch (variable) {
-        case 'lines':
-            if (!context.lines) {
-                return '';
-            }
-            return context.lines.toFragment(context.lineSeparator);
-        default:
-            throw new Error(`${variable} is not a valid editor variable.`);
-    }
-}
-
 function evaluateRegex(context: Context, value: string, template: string | undefined): string {
     if (!template) {
-        throw new Error(`${value} cannot be resolved because no regex template name is given.`);
+        throw new Error(`${value} cannot be resolved because no regex template name is given`);
     }
     const regex = getRegex(context, template);
     return `(?<${template}>${regex})`;
