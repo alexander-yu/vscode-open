@@ -12,6 +12,7 @@ const RequiredFileMapping = t.type({
 });
 const OptionalFileMapping = t.partial({
 	lineSeparator: t.string,
+	linePrefix: t.string,
 });
 const FileMapping = t.intersection([RequiredFileMapping, OptionalFileMapping]);
 

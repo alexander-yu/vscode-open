@@ -59,7 +59,8 @@ See the [release notes](https://github.com/alexander-yu/vscode-open/blob/master/
         {
             "pattern": "${editor:file}",
             "output": "https://host.example.com/repo/${editor:relativeFile}${editor:lines}",
-            "lineSeparator": "#"
+            "lineSeparator": "#",
+            "linePrefix": "L"
         }
     ],
     "open.prMappings": [

@@ -62,6 +62,9 @@ function openLines() {
 			if (mapping.lineSeparator) {
 				context.lineSeparator = mapping.lineSeparator;
 			}
+			if (mapping.linePrefix) {
+				context.linePrefix = mapping.linePrefix;
+			}
 
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 			const match = pattern.exec(uri.fsPath);

@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.2.2 - 2020-09-17
+
+### Added
+
+- Added a new setting `linePrefix` to `open.fileMappings`; this will allow users to specify a line prefix when generating URIs from files
+  - This is particularly useful for GitHub URIs, since line numbers are always prefixed by an `L`; the URI to file is already supported as of v0.1.9, but this adds the reverse functionality
+
 ## 0.2.0 - 2020-09-16
 
 ### Added

@@ -33,7 +33,8 @@ function escapeRegex(value: string): string {
 
 export const REGEXES : RangeRegex[] = [
     new RangeRegex('[0-9]+', ''),
-    // e.g. for GitHub, where line numbers are of the form L123-124 instead of 123-124
+    // e.g. for GitHub, where line numbers are of the form L123-L124 instead of 123-124; hard-code this
+    // since it's a relatively common line format
     new RangeRegex('[0-9]+', 'L'),
 ];
 
@@ -46,11 +47,11 @@ export class Range {
         this.end = end;
     }
 
-    toFragment(lineSeparator: string): string {
+    toFragment(lineSeparator: string, linePrefix: string): string {
         if (this.start === this.end) {
-            return `${lineSeparator}${this.start.toString()}`;
+            return `${lineSeparator}${linePrefix}${this.start.toString()}`;
         }
-        return `${lineSeparator}${this.start.toString()}-${this.end.toString()}`;
+        return `${lineSeparator}${linePrefix}${this.start.toString()}-${linePrefix}${this.end.toString()}`;
     }
 }
 
