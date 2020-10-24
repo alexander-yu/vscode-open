@@ -41,8 +41,8 @@ export async function getPullRequestURI(file: string, line: number, provider: co
             return vscode.Uri.parse(uri, true);
         default:
             throw new Error(
-                `A valid version control provider is required, but got ${provider.type}. ` +
-                `Valid values: ${PROVIDER_TYPE_VALUES}`
+                `A valid version control provider is required for generating PR URIs, but got ${provider.type}. ` +
+                `Valid values: [${ProviderType.PHABRRICATOR}]`
             );
     }
 }
