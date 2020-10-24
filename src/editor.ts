@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 import { Context } from './context';
+import * as range from './range';
 
 function getWorkspaceFolder(variable: string, folderName?: string): vscode.Uri {
     const folders = vscode.workspace.workspaceFolders;
@@ -55,7 +56,7 @@ export function evaluateEditor(context: Context, value: string, variable: string
             if (!context.lines) {
                 return '';
             }
-            return context.lines.toFragment(context.lineSeparator, context.linePrefix);
+            return range.toFragment(context, context.lines);
         case 'workspaceFolder':
             return getWorkspaceFolder(variable, argument).fsPath;
         case 'workspaceFolderBasename':

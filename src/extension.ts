@@ -15,7 +15,7 @@ function getSelectedLines(editor: vscode.TextEditor): range.Range {
 	const active = editor.selection.active.line + 1;
 	const start = Math.min(anchor, active);
 	const end = Math.max(anchor, active);
-	return new range.Range(start, end);
+	return { start: start, end: end };
 }
 
 async function openPR() {
@@ -135,7 +135,7 @@ async function openURI() {
 				if (match) {
 					context.match = match;
 					const output = variables.resolve(mapping.output, context);
-					const [fileName, lines] = range.extractRangeFromURI(context.lineSeparator, output);
+					const [fileName, lines] = range.extract(context, output);
 					const editor = await vscode.window.showTextDocument(vscode.Uri.file(fileName));
 
 					if (lines) {

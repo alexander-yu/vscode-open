@@ -6,13 +6,13 @@ export class Context {
     lines: range.Range | null;
     match: RegExpExecArray | null;
     lineSeparator: string;
-    linePrefix: string;
+    linePrefix: string | null;
 
     constructor(lines?: range.Range) {
         this.env = process.env;
         this.lines = lines || null;
         this.match = null;
         this.lineSeparator = constants.DEFAULT_LINE_SEPARATOR;
-        this.linePrefix = '';
+        this.linePrefix = null;
     }
 }
