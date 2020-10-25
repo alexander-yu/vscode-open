@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.2.3 - 2020-10-25
+
+- Added a new setting `linePrefix` to `open.uriMappings`; this is similar to the change added from v0.2.2, except the line prefix will be used to recognize line ranges from given URIs, as opposed to generating URIs
+  - Default behavior if `linePrefix` is not specified will continue to be the previous behavior (i.e. support for both empty line prefixes and a prefix of `L` for GitHub-style URIs)
+
 ## 0.2.2 - 2020-09-17
 
 ### Added

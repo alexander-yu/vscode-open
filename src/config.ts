@@ -29,6 +29,7 @@ const RequiredURIMapping = t.type({
 });
 const OptionalURIMapping = t.partial({
 	lineSeparator: t.string,
+	linePrefix: t.string,
 	provider: GitProvider,
 });
 const URIMapping = t.intersection([RequiredURIMapping, OptionalURIMapping]);
