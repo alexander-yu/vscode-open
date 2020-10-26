@@ -13,7 +13,7 @@ export function getRegex(context: Context, template: string): string {
 
     if (template === 'lines' && context.lineSeparator) {
         return range.getRegexes(context).map(
-            regex => `(?:${regex})`
+            regex => `(?:${regex.source})`
         ).join('|');
     }
 

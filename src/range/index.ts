@@ -39,5 +39,8 @@ export function toFragment(context: Context, range: Range): string {
     if (range.start === range.end) {
         return `${context.lineSeparator}${linePrefix}${range.start.toString()}`;
     }
-    return `${context.lineSeparator}${linePrefix}${range.start.toString()}-${linePrefix}${range.end.toString()}`;
+    return (
+        `${context.lineSeparator}${linePrefix}${range.start.toString()}` +
+        `${context.lineRangeSeparator}${linePrefix}${range.end.toString()}`
+    );
 }

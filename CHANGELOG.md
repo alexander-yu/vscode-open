@@ -1,6 +1,20 @@
 # Change Log
 
+## 0.2.5 - 2020-10-25
+
+### Added
+
+- Added a new setting `lineRangeSeparator` to `open.uriMappings` and `open.fileMappings`; this allows for configuring the text used to separate the lower/upper line numbers in a line number range (this defaults to just `-`); this is useful for BitBucket URIs, where line number ranges use `:` instead of `-`
+
+### Fixed
+
+- Fixed bug where contexts are not getting completely reset when iterating through multiple mappings
+- Fixed bug where line number range regex did not include the end of the string
+- Fixed bug where line number regexes contained extra `/` symbols
+
 ## 0.2.4 - 2020-10-25
+
+### Added
 
 - Added a new setting `linePrefix` to `open.uriMappings`; this is similar to the change added from v0.2.2, except the line prefix will be used to recognize line ranges from given URIs, as opposed to generating URIs
   - Default behavior if `linePrefix` is not specified will continue to be the previous behavior (i.e. support for both empty line prefixes and a prefix of `L` for GitHub-style URIs)

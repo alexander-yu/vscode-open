@@ -18,6 +18,7 @@ const RequiredFileMapping = t.type({
 const OptionalFileMapping = t.partial({
 	lineSeparator: t.string,
 	linePrefix: t.string,
+	lineRangeSeparator: t.string,
 	provider: GitProvider,
 });
 const FileMapping = t.intersection([RequiredFileMapping, OptionalFileMapping]);
@@ -30,6 +31,7 @@ const RequiredURIMapping = t.type({
 const OptionalURIMapping = t.partial({
 	lineSeparator: t.string,
 	linePrefix: t.string,
+	lineRangeSeparator: t.string,
 	provider: GitProvider,
 });
 const URIMapping = t.intersection([RequiredURIMapping, OptionalURIMapping]);

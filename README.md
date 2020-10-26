@@ -49,8 +49,9 @@ Mappings are the main settings that determine how to generate file paths/URIs/PR
     |-------------|--------|-----------|
     |`pattern`|Yes|Pattern that matches file paths; paths matching this pattern will have the mapping in question applied.|
     |`output`|Yes|Pattern that generates URIs; will be applied to the path captured by `pattern`.|
-    |`lineSeparator`|No|Optional parameter for configuring the symbol used to denote the line numbers in the URI, e.g. the `#` in `#123-124`. Defaults to `#`.|
+    |`lineSeparator`|No|Optional parameter for configuring the text used to denote the line numbers in the URI, e.g. the `#` in `#123-124`. Defaults to `#`.|
     |`linePrefix`|No|Optional parameter for configuring the prefix used for rendering line numbers in the URI, e.g. setting this to `L` will render the line numbers as `L123-L124`. Defaults to nothing.|
+    |`lineRangeSeparator`|No|Optional parameter for configuring the text used to denote the line number range in the URI, e.g. the `-` in `#123-124`. Defaults to `-`.|
 
 - **open.prMappings**
   - Type: `object[]`
@@ -74,8 +75,9 @@ Mappings are the main settings that determine how to generate file paths/URIs/PR
     |-------------|--------|-----------|
     |`pattern`|Yes|Pattern that matches URIs; URIs matching this pattern will have the mapping in question applied.|
     |`output`|Yes|Pattern that generates file paths; will be applied to the URI captured by `pattern`.|
-    |`lineSeparator`|No|Optional parameter for configuring the symbol used to denote the line numbers in the URI, e.g. the `#` in `#123-124`. Defaults to `#`.|
+    |`lineSeparator`|No|Optional parameter for configuring the text used to denote the line numbers in the URI, e.g. the `#` in `#123-124`. Defaults to `#`.|
     |`linePrefix`|No|Optional parameter for configuring the prefix used for rendering line numbers in the URI, e.g. setting this to `L` will recognize line numbers such as `L123-L124`. Default support is for no line prefix or a line prefix of `L`.|
+    |`lineRangeSeparator`|No|Optional parameter for configuring the text used to denote the line number range in the URI, e.g. the `-` in `#123-124`. Defaults to `-`.|
 
 ### Variables
 

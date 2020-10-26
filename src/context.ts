@@ -7,6 +7,7 @@ export class Context {
     match: RegExpExecArray | null;
     lineSeparator: string;
     linePrefix: string | null;
+    lineRangeSeparator: string;
 
     constructor(lines?: range.Range) {
         this.env = process.env;
@@ -14,5 +15,6 @@ export class Context {
         this.match = null;
         this.lineSeparator = constants.DEFAULT_LINE_SEPARATOR;
         this.linePrefix = null;
+        this.lineRangeSeparator = constants.DEFAULT_LINE_RANGE_SEPARATOR;
     }
 }

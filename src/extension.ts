@@ -27,9 +27,9 @@ async function openPR() {
 	try {
 		const uri = editor.document.uri;
 		const mappings = config.getMappings<config.PRMappingType>('prMappings');
-		const context = new Context(getSelectedLines(editor));
 
 		for (const mapping of mappings)  {
+			const context = new Context(getSelectedLines(editor));
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 			const match = pattern.exec(uri.fsPath);
 			if (match) {
@@ -56,14 +56,17 @@ function openLines() {
 	try {
 		const uri = editor.document.uri;
 		const mappings = config.getMappings<config.FileMappingType>('fileMappings');
-		const context = new Context(getSelectedLines(editor));
 
 		for (const mapping of mappings)  {
+			const context = new Context(getSelectedLines(editor));
 			if (mapping.lineSeparator) {
 				context.lineSeparator = mapping.lineSeparator;
 			}
 			if (mapping.linePrefix) {
 				context.linePrefix = mapping.linePrefix;
+			}
+			if (mapping.lineRangeSeparator) {
+				context.lineRangeSeparator = mapping.lineRangeSeparator;
 			}
 
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
@@ -91,11 +94,14 @@ function open() {
 	try {
 		const uri = editor.document.uri;
 		const mappings = config.getMappings<config.FileMappingType>('fileMappings');
-		const context = new Context();
 
 		for (const mapping of mappings)  {
+			const context = new Context();
 			if (mapping.lineSeparator) {
 				context.lineSeparator = mapping.lineSeparator;
+			}
+			if (mapping.lineRangeSeparator) {
+				context.lineRangeSeparator = mapping.lineRangeSeparator;
 			}
 
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
@@ -117,8 +123,6 @@ function open() {
 async function openURI() {
 	try {
 		const mappings = config.getMappings<config.URIMappingType>('uriMappings');
-		const context = new Context();
-
 		const uri = await vscode.window.showInputBox({
 			placeHolder: 'https://host.example.com/repo/file#1-3',
 			prompt: 'Enter URI to open file for',
@@ -126,11 +130,15 @@ async function openURI() {
 
 		if (uri) {
 			for (const mapping of mappings)  {
+				const context = new Context();
 				if (mapping.lineSeparator) {
 					context.lineSeparator = mapping.lineSeparator;
 				}
 				if (mapping.linePrefix) {
 					context.linePrefix = mapping.linePrefix;
+				}
+				if (mapping.lineRangeSeparator) {
+					context.lineRangeSeparator = mapping.lineRangeSeparator;
 				}
 
 				const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
