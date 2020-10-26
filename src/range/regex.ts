@@ -1,4 +1,4 @@
-import { Context } from './context';
+import { Config } from './config';
 
 const DEFAULT_LINE_PREFIXES = [
     '',
@@ -8,10 +8,10 @@ const DEFAULT_LINE_PREFIXES = [
 ];
 const LINE_REGEX = '[0-9]+';
 
-export function getRegexes(context: Context, captureGroups: boolean = false): RegExp[] {
-    const linePrefixes = context.linePrefix === null ? DEFAULT_LINE_PREFIXES : [context.linePrefix];
+export function getRegexes(config: Config, captureGroups: boolean = false): RegExp[] {
+    const linePrefixes = config.linePrefix === null ? DEFAULT_LINE_PREFIXES : [config.linePrefix];
     return linePrefixes.map(
-        linePrefix => new RegExp(toRegex(linePrefix, context.lineSeparator, context.lineRangeSeparator, captureGroups))
+        linePrefix => new RegExp(toRegex(linePrefix, config.lineSeparator, config.lineRangeSeparator, captureGroups))
     );
 }
 

@@ -1,15 +1,15 @@
-import { Context } from './context';
+import { Config } from './config';
 import { Range } from './range';
 import { getRegexes } from './regex';
 
 export { Range } from './range';
 export { getRegexes } from './regex';
 
-export function extract(context: Context, uri: string): [string, Range | null] {
+export function extract(config: Config, uri: string): [string, Range | null] {
     let range: Range | null = null;
     let match: RegExpExecArray | null = null;
 
-    for (const regex of getRegexes(context, true)) {
+    for (const regex of getRegexes(config, true)) {
         match = regex.exec(uri);
         if (match) {
             break;
@@ -33,14 +33,14 @@ export function extract(context: Context, uri: string): [string, Range | null] {
     return [uri, range];
 }
 
-export function toFragment(context: Context, range: Range): string {
-    const linePrefix = context.linePrefix || '';
+export function toFragment(config: Config, range: Range): string {
+    const linePrefix = config.linePrefix || '';
 
     if (range.start === range.end) {
-        return `${context.lineSeparator}${linePrefix}${range.start.toString()}`;
+        return `${config.lineSeparator}${linePrefix}${range.start.toString()}`;
     }
     return (
-        `${context.lineSeparator}${linePrefix}${range.start.toString()}` +
-        `${context.lineRangeSeparator}${linePrefix}${range.end.toString()}`
+        `${config.lineSeparator}${linePrefix}${range.start.toString()}` +
+        `${config.lineRangeSeparator}${linePrefix}${range.end.toString()}`
     );
 }
