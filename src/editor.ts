@@ -56,7 +56,7 @@ export function evaluateEditor(context: Context, value: string, variable: string
             if (!context.lines) {
                 return '';
             }
-            return range.toFragment(context, context.lines);
+            return range.toFragment(context.rangeConfig, context.lines);
         case 'workspaceFolder':
             return getWorkspaceFolder(variable, argument).fsPath;
         case 'workspaceFolderBasename':

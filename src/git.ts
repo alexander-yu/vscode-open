@@ -13,10 +13,6 @@ enum ProviderType {
     PHABRRICATOR = 'phabricator',
 }
 
-const PROVIDER_TYPE_VALUES = Object.keys(ProviderType).map(
-    key => ProviderType[key as keyof typeof ProviderType]
-);
-
 // TODO (ayu): docstrings
 async function getBlameCommit(file: string, line: number): Promise<DefaultLogFields & ListLogLine> {
     // TODO (ayu): catch errors

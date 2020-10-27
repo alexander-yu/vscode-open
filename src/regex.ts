@@ -11,8 +11,8 @@ export function getRegex(context: Context, template: string): string {
         throw new Error(`${template} is not a valid regex template.`);
     }
 
-    if (template === 'lines' && context.lineSeparator) {
-        return range.getRegexes(context).map(
+    if (template === 'lines' && context.rangeConfig.lineSeparator) {
+        return range.getRegexes(context.rangeConfig).map(
             regex => `(?:${regex.source})`
         ).join('|');
     }
