@@ -2,6 +2,7 @@ import { Config } from './config';
 import { Range } from './range';
 import { getRegexes } from './regex';
 
+export { Config } from './config';
 export { Range } from './range';
 export { getRegexes } from './regex';
 

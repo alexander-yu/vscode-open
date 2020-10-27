@@ -29,7 +29,9 @@ async function openPR() {
 		const mappings = config.getMappings<config.PRMappingType>('prMappings');
 
 		for (const mapping of mappings)  {
-			const context = new Context(getSelectedLines(editor));
+			const context = new Context({
+				lines: getSelectedLines(editor),
+			});
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 			const match = pattern.exec(uri.fsPath);
 			if (match) {
@@ -58,16 +60,14 @@ function openLines() {
 		const mappings = config.getMappings<config.FileMappingType>('fileMappings');
 
 		for (const mapping of mappings)  {
-			const context = new Context(getSelectedLines(editor));
-			if (mapping.lineSeparator) {
-				context.lineSeparator = mapping.lineSeparator;
-			}
-			if (mapping.linePrefix) {
-				context.linePrefix = mapping.linePrefix;
-			}
-			if (mapping.lineRangeSeparator) {
-				context.lineRangeSeparator = mapping.lineRangeSeparator;
-			}
+			const context = new Context({
+				lines: getSelectedLines(editor),
+				rangeConfig: {
+					lineSeparator: mapping.lineSeparator,
+					linePrefix: mapping.linePrefix,
+					lineRangeSeparator: mapping.lineRangeSeparator,
+				},
+			});
 
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 			const match = pattern.exec(uri.fsPath);
@@ -96,13 +96,13 @@ function open() {
 		const mappings = config.getMappings<config.FileMappingType>('fileMappings');
 
 		for (const mapping of mappings)  {
-			const context = new Context();
-			if (mapping.lineSeparator) {
-				context.lineSeparator = mapping.lineSeparator;
-			}
-			if (mapping.lineRangeSeparator) {
-				context.lineRangeSeparator = mapping.lineRangeSeparator;
-			}
+			const context = new Context({
+				rangeConfig: {
+					lineSeparator: mapping.lineSeparator,
+					linePrefix: mapping.linePrefix,
+					lineRangeSeparator: mapping.lineRangeSeparator,
+				},
+			});
 
 			const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 			const match = pattern.exec(uri.fsPath);
@@ -130,23 +130,20 @@ async function openURI() {
 
 		if (uri) {
 			for (const mapping of mappings)  {
-				const context = new Context();
-				if (mapping.lineSeparator) {
-					context.lineSeparator = mapping.lineSeparator;
-				}
-				if (mapping.linePrefix) {
-					context.linePrefix = mapping.linePrefix;
-				}
-				if (mapping.lineRangeSeparator) {
-					context.lineRangeSeparator = mapping.lineRangeSeparator;
-				}
+				const context = new Context({
+					rangeConfig: {
+						lineSeparator: mapping.lineSeparator,
+						linePrefix: mapping.linePrefix,
+						lineRangeSeparator: mapping.lineRangeSeparator,
+					},
+				});
 
 				const pattern = RegExp(variables.resolve(mapping.pattern, context), 'g');
 				const match = pattern.exec(uri);
 				if (match) {
 					context.match = match;
 					const output = variables.resolve(mapping.output, context);
-					const [fileName, lines] = range.extract(context, output);
+					const [fileName, lines] = range.extract(context.rangeConfig, output);
 					const editor = await vscode.window.showTextDocument(vscode.Uri.file(fileName));
 
 					if (lines) {
