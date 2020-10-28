@@ -2,4 +2,5 @@ dist
 node_modules
 out
 *.vsix
+.nyc_output
 .vscode-test

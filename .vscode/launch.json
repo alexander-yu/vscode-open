@@ -29,8 +29,8 @@
             "runtimeExecutable": "${execPath}",
             "args": [
                 "--disable-extensions",
-                "--extensionDevelopmentPath=${workspaceFolder}",
-                "--extensionTestsPath=${workspaceFolder}/out/test/suite"
+                "--extensionDevelopmentPath=${workspaceFolder}/src/test/integration/test_repo",
+                "--extensionTestsPath=${workspaceFolder}/out/test/integration"
             ],
             "stopOnEntry": false,
             "sourceMaps": true,
@@ -45,7 +45,7 @@
 			"type": "node",
 			"runtimeVersion": "12.18.3",
 			"request": "launch",
-			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+			"program": "${workspaceFolder}/node_modules/.bin/mocha",
 			"args": [
 				"./out/test/unit",
                 "--ui=tdd",
