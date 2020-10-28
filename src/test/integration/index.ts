@@ -2,7 +2,35 @@ import * as path from 'path';
 import * as Mocha from 'mocha';
 import * as glob from 'glob';
 
+function setupCoverage() {
+	const NYC = require('nyc');
+	const nyc = new NYC({
+		cwd: path.resolve(__dirname, '../../../'),
+		reporter: ['lcov', 'text', 'html'],
+		extension: [
+			'.ts',
+			'.tsx'
+		],
+		exclude: [
+			'**/test/**',
+			'**/*.d.ts',
+		],
+		all: true,
+		instrument: true,
+		hookRequire: true,
+		hookRunInContext: true,
+		hookRunInThisContext: true,
+	});
+
+	nyc.reset();
+	nyc.wrap();
+
+	return nyc;
+  }
+
+
 export function run(): Promise<void> {
+	const nyc = setupCoverage();
 	// Create the mocha test
 	const mocha = new Mocha({
 		ui: 'tdd',
@@ -32,6 +60,9 @@ export function run(): Promise<void> {
 			} catch (err) {
 				console.error(err);
 				e(err);
+			} finally {
+				nyc.writeCoverageFile();
+				nyc.report();
 			}
 		});
 	});

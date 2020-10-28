@@ -128,7 +128,7 @@
 		"webpack": "webpack --mode development",
 		"webpack-dev": "webpack --mode development --watch",
 		"test-compile": "tsc -p ./",
-		"clean": "rm -rf ./dist ./out *.vsix"
+		"clean": "rm -rf ./dist ./out *.vsix .nyc_output coverage"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.2.14",
@@ -143,6 +143,7 @@
 		"glob": "^7.1.6",
 		"mocha": "^7.1.0",
 		"nyc": "^15.1.0",
+		"source-map-support": "^0.5.19",
 		"ts-loader": "^8.0.3",
 		"typescript": "^3.7.5",
 		"vscode-test": "^1.3.0",

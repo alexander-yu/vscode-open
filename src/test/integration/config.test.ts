@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as config from '../../config';
 
 suite('getMappings', () => {
-	vscode.window.showInformationMessage('Starting getMappings tests.');
+    vscode.window.showInformationMessage('Starting getMappings tests.');
 
     test('Raise error if invalid setting', () => {
         expect(() => {
