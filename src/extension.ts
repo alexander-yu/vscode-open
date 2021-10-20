@@ -45,7 +45,8 @@ async function openPR() {
 
 		throw new Error(`${uri.fsPath} did not match any PR mappings`);
 	} catch (error) {
-		vscode.window.showErrorMessage(error.message);
+		const msg = (error instanceof Error) ? error.message : String(error);
+		vscode.window.showErrorMessage(msg);
 	}
 }
 
@@ -81,7 +82,8 @@ function openLines() {
 
 		throw new Error(`${uri.fsPath} did not match any file mappings`);
 	} catch (error) {
-		vscode.window.showErrorMessage(error.message);
+		const msg = (error instanceof Error) ? error.message : String(error);
+		vscode.window.showErrorMessage(msg);
 	}
 }
 
@@ -116,7 +118,8 @@ function open() {
 
 		throw new Error(`${uri.fsPath} did not match any file mappings`);
 	} catch (error) {
-		vscode.window.showErrorMessage(error.message);
+		const msg = (error instanceof Error) ? error.message : String(error);
+		vscode.window.showErrorMessage(msg);
 	}
 }
 
@@ -163,7 +166,8 @@ async function openURI() {
 			throw new Error(`${uri} did not match any URI mappings`);
 		}
 	} catch (error) {
-		vscode.window.showErrorMessage(error.message);
+		const msg = (error instanceof Error) ? error.message : String(error);
+		vscode.window.showErrorMessage(msg);
 	}
 }
 
