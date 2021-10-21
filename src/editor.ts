@@ -48,7 +48,7 @@ export function evaluateEditor(context: Context, value: string, variable: string
 
     if (parts.length > 1) {
         variable = parts[0];
-        argument = parts[1];
+        argument = parts.slice(1).join(':');
     }
 
     switch (variable) {

@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.6 - 2021-10-21
+
+### Fixed
+
+- Fixed bug where workspace folders were inadvertently dropped from editor variables
+
 ## 0.2.5 - 2020-10-25
 
 ### Added

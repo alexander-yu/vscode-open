@@ -54,7 +54,7 @@ function evaluate(value: string, variable: string, context: Context): string {
 
     if (parts.length > 1) {
         variable = parts[0];
-        argument = parts[1];
+        argument = parts.slice(1).join(':');
     }
 
     const handler = VARIABLE_HANDLERS.get(variable);
