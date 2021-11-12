@@ -2,7 +2,7 @@
 	"name": "vscode-open",
 	"displayName": "Open",
 	"description": "An extension for opening files",
-	"version": "0.2.6",
+	"version": "0.2.7",
 	"publisher": "alexander-yu",
 	"engines": {
 		"vscode": "^1.43.0"
