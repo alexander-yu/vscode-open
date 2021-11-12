@@ -189,6 +189,11 @@ This category provides some standard regex templates to use. This will be subsit
 {
     "open.fileMappings": [
         {
+
+            "pattern": "src/static/(?<mdFileWithoutExt>.+)\\.md$",
+            "output": "https://host.example.com/docs/${match:mdFileWithoutExt}"
+        },
+        {
             "pattern": "${editor:file}",
             "output": "https://host.example.com/repo/${editor:relativeFile}${editor:lines}",
             "lineSeparator": "#",
