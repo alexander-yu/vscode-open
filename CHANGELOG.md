@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.7 - 2021-11-11
+
+- Added new example to README for using normal regex patterns in mappings
+
 ## 0.2.6 - 2021-10-21
 
 ### Fixed
