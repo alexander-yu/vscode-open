@@ -18,6 +18,10 @@ function getSelectedLines(editor: vscode.TextEditor): range.Range {
 	return { start: start, end: end };
 }
 
+function normalizeSlashes(string: string): string {
+	return string.replace(/\\/g, '/');
+}
+
 async function openPR() {
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
@@ -74,7 +78,7 @@ function openLines() {
 			const match = pattern.exec(uri.fsPath);
 			if (match) {
 				context.match = match;
-				const output = variables.resolve(mapping.output, context);
+				const output = normalizeSlashes(variables.resolve(mapping.output, context));
 				vscode.env.openExternal(vscode.Uri.parse(output, true));
 				return;
 			}
@@ -110,7 +114,7 @@ function open() {
 			const match = pattern.exec(uri.fsPath);
 			if (match) {
 				context.match = match;
-				const output = variables.resolve(mapping.output, context);
+				const output = normalizeSlashes(variables.resolve(mapping.output, context));
 				vscode.env.openExternal(vscode.Uri.parse(output, true));
 				return;
 			}

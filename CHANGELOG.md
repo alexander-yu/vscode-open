@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.2.8 - 2021-12-10
+
+### Fixed
+
+- Fixed bug where Windows file paths could not be matched/generated bad URLs
+
 ## 0.2.7 - 2021-11-11
 
 ### Added

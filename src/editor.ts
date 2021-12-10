@@ -4,7 +4,11 @@ import * as vscode from 'vscode';
 import { Context } from './context';
 import * as range from './range';
 
-function getWorkspaceFolder(variable: string, folderName?: string): vscode.Uri {
+function escape(path: string): string {
+    return process.platform === 'win32' ? path.replace(/\\/g, '\\\\') : path;
+}
+
+function getWorkspaceFolder(variable: string, folderName?: string): string {
     const folders = vscode.workspace.workspaceFolders;
 
     if (!folders || folders.length === 0) {
@@ -13,7 +17,7 @@ function getWorkspaceFolder(variable: string, folderName?: string): vscode.Uri {
 
     if (!folderName) {
         if (folders.length === 1) {
-            return folders[0].uri;
+            return escape(folders[0].uri.fsPath);
         }
         throw new Error(
             `${variable} cannot be resolved because no folder name was specified ` +
@@ -26,16 +30,16 @@ function getWorkspaceFolder(variable: string, folderName?: string): vscode.Uri {
         throw new Error(`${variable} cannot be resolved because no folder with name ${folderName} was found`);
     }
 
-    return uri;
+    return escape(uri.fsPath);
 }
 
-function getOpenFile(variable: string): vscode.Uri {
+function getOpenFile(variable: string): string {
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
         throw new Error(`${variable} cannot be resolved because there is currently no open file`);
     }
 
-    return editor.document.uri;
+    return escape(editor.document.uri.fsPath);
 }
 
 export function evaluateEditor(context: Context, value: string, variable: string | undefined): string {
@@ -58,31 +62,31 @@ export function evaluateEditor(context: Context, value: string, variable: string
             }
             return range.toFragment(context.rangeConfig, context.lines);
         case 'workspaceFolder':
-            return getWorkspaceFolder(variable, argument).fsPath;
+            return getWorkspaceFolder(variable, argument);
         case 'workspaceFolderBasename':
-            return path.basename(getWorkspaceFolder(variable, argument).fsPath);
+            return path.basename(getWorkspaceFolder(variable, argument));
         case 'file':
-            return getOpenFile(variable).fsPath;
+            return getOpenFile(variable);
         case 'relativeFile':
             return path.normalize(path.relative(
-                getWorkspaceFolder(variable, argument).fsPath,
-                getOpenFile(variable).fsPath,
+                getWorkspaceFolder(variable, argument),
+                getOpenFile(variable),
             ));
         case 'relativeFileDirname':
             return path.normalize(path.relative(
-                getWorkspaceFolder(variable, argument).fsPath,
-                path.dirname(getOpenFile(variable).fsPath),
+                getWorkspaceFolder(variable, argument),
+                path.dirname(getOpenFile(variable)),
             ));
         case 'fileBasename':
-            return path.basename(getOpenFile(variable).fsPath);
+            return path.basename(getOpenFile(variable));
         case 'fileBasenameNoExtension':
-            const basename = path.basename(getOpenFile(variable).fsPath);
+            const basename = path.basename(getOpenFile(variable));
             const extension = path.extname(basename);
             return basename.slice(0, -extension.length);
         case 'fileDirname':
-            return path.dirname(getOpenFile(variable).fsPath);
+            return path.dirname(getOpenFile(variable));
         case 'fileExtname':
-            return path.extname(getOpenFile(variable).fsPath);
+            return path.extname(getOpenFile(variable));
         default:
             throw new Error(`${variable} is not a valid editor variable.`);
     }
