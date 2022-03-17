@@ -153,7 +153,7 @@
 	"dependencies": {
 		"fp-ts": "^2.8.2",
 		"io-ts": "^2.2.10",
-		"simple-git": "^1.131.0",
+		"simple-git": "^3.3.0",
 		"yarn": "^1.22.4"
 	}
 }
