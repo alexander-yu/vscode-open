@@ -64,7 +64,7 @@ Mappings are the main settings that determine how to generate file paths/URIs/PR
   - The `provider` setting has the following schema:
     |Property Name|Required|Description|
     |-------------|--------|-----------|
-    |`type`|Yes|Provider type; supported values are: `phabricator`.|
+    |`type`|Yes|Provider type; supported values are: `phabricator`, `github` (**Note**: only public GitHub repos are currently supported).|
     |`base`|Yes|Base URL for provider.|
 
 - **open.uriMappings**

@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.3.0 - 2022-03-18
+
+### Added
+
+- Added support for opening PRs for public GitHub repos
+  - **Note**: user authentication is currently not implemented, meaning that public GitHub repos are the only ones currently supported
+
 ## 0.2.9 - 2021-12-10
 
 ### Fixed

@@ -5,11 +5,13 @@ import simpleGit, { DefaultLogFields, ListLogLine } from 'simple-git';
 import * as vscode from 'vscode';
 
 import * as config from './config';
+import * as gh from './github';
 import * as ph from './phabricator';
 
 
 enum ProviderType {
     PHABRRICATOR = 'phabricator',
+    GITHUB = 'github',
 }
 
 // TODO (ayu): docstrings
@@ -38,6 +40,31 @@ export async function getPullRequestURI(file: string, line: number, provider: co
             const revision = ph.getRevisionID(commit.body);
             const uri = new url.URL(revision, provider.base).toString();
             return vscode.Uri.parse(uri, true);
+        case ProviderType.GITHUB:
+            // TODO (ayu): support enterprise GitHub
+            if (provider.base !== 'https://github.com') {
+                throw new Error(
+                    'Only public GitHub repos are currently supported. Must set GitHub base to https://github.com.'
+                );
+            }
+            let remote = await simpleGit(path.dirname(file)).remote(['get-url', 'origin']);
+
+            if (!remote) {
+                throw new Error('No remote origin exists.');
+            } else if (!remote.startsWith(provider.base)) {
+                throw new Error(`Base URL is ${provider.base} but remote origin is ${remote}.`);
+            }
+
+            // Strip base URL and .git suffix so that we're left with /owner/repo
+            remote = remote.slice(provider.base.length).trim();
+
+            if (remote.endsWith('.git')) {
+                remote = remote.slice(0, -4);
+            }
+
+            const parts = remote.split('/').slice(-2);
+            const prUrl = await gh.getPullRequest(parts[0], parts[1], commit.hash);
+            return vscode.Uri.parse(prUrl, true);
         default:
             throw new Error(
                 `A valid version control provider is required for generating PR URIs, but got ${provider.type}. ` +
