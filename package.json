@@ -153,7 +153,7 @@
 	"dependencies": {
 		"fp-ts": "^2.8.2",
 		"io-ts": "^2.2.10",
-		"octokit": "^1.7.1",
+		"octokit": "^3.1.2",
 		"simple-git": "^3.16.0",
 		"yarn": "^1.22.4"
 	}
