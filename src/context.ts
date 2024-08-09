@@ -1,4 +1,5 @@
 import * as constants from './constants';
+import { GitContext } from './git';
 import * as range from './range';
 
 type RangeConfigParams = {
@@ -8,18 +9,21 @@ type RangeConfigParams = {
 };
 
 type ContextParams = {
+    git?: GitContext | null,
     lines?: range.Range,
     rangeConfig?: RangeConfigParams,
 };
 
 export class Context {
     env: NodeJS.ProcessEnv;
+    git: GitContext | null;
     lines: range.Range | null;
     match: RegExpExecArray | null;
     rangeConfig: range.Config;
 
     constructor(params: ContextParams) {
         this.env = process.env;
+        this.git = params.git ?? null;
         this.lines = params.lines ?? null;
         this.match = null;
         this.rangeConfig = {

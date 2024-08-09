@@ -14,6 +14,23 @@ enum ProviderType {
     GITHUB = 'github',
 }
 
+export type GitContext = {
+    currentFileCommit: string,
+};
+
+export async function getGitContext(file: string): Promise<GitContext | null> {
+    const git = simpleGit(path.dirname(file));
+    const isRepo = await git.checkIsRepo();
+
+    if (!isRepo) {
+        return null;
+    }
+
+    return {
+        currentFileCommit: await git.revparse(['HEAD']),
+    };
+}
+
 // TODO (ayu): docstrings
 async function getBlameCommit(file: string, line: number): Promise<DefaultLogFields & ListLogLine | null> {
     // TODO (ayu): catch errors

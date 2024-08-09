@@ -87,6 +87,11 @@ export function evaluateEditor(context: Context, value: string, variable: string
             return path.dirname(getOpenFile(variable));
         case 'fileExtname':
             return path.extname(getOpenFile(variable));
+        case 'currentCommit':
+            if (!context.git) {
+                throw new Error(`${variable} cannot be resolved because there is no git repo`);
+            }
+            return context.git.currentFileCommit;
         default:
             throw new Error(`${variable} is not a valid editor variable.`);
     }

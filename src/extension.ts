@@ -54,7 +54,7 @@ async function openPR() {
 	}
 }
 
-function openLines() {
+async function openLines() {
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
 		return;
@@ -66,6 +66,7 @@ function openLines() {
 
 		for (const mapping of mappings)  {
 			const context = new Context({
+				git: await git.getGitContext(uri.fsPath),
 				lines: getSelectedLines(editor),
 				rangeConfig: {
 					lineSeparator: mapping.lineSeparator,
@@ -91,7 +92,7 @@ function openLines() {
 	}
 }
 
-function open() {
+async function open() {
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
 		return;
@@ -103,6 +104,7 @@ function open() {
 
 		for (const mapping of mappings)  {
 			const context = new Context({
+				git: await git.getGitContext(uri.fsPath),
 				rangeConfig: {
 					lineSeparator: mapping.lineSeparator,
 					linePrefix: mapping.linePrefix,
