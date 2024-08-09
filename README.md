@@ -1,6 +1,6 @@
 # vscode-open
 
-[![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/alexander-yu.vscode-open.svg)](https://marketplace.visualstudio.com/items?itemName=alexander-yu.vscode-open) [![GitHub license](https://img.shields.io/github/license/alexander-yu/vscode-open.svg)](https://github.com/alexander-yu/vscode-open/blob/master/LICENSE)
+[![VS Marketplace version](https://vsmarketplacebadges.dev/version/alexander-yu.vscode-open.svg)](https://marketplace.visualstudio.com/items?itemName=alexander-yu.vscode-open) [![GitHub license](https://img.shields.io/github/license/alexander-yu/vscode-open.svg)](https://github.com/alexander-yu/vscode-open/blob/master/LICENSE)
 
 This is a [Visual Studio Code](https://code.visualstudio.com/) extension for opening files in your browser, or vice versa.
 
@@ -110,6 +110,7 @@ This category surfaces information about the current editor context. Many of the
 |`${editor:fileDirname}`|The current opened file's dirname.|
 |`${editor:fileExtname}`|The current opened file's extension.|
 |`${editor:lines}`|The selected lines of the current opened file. The exact output is configurable via settings like `lineSeparator` and `linePrefix`.|
+|`${editor:currentCommit}`|The current commit hash of the opened file.|
 
 **Examples:**
 
@@ -159,6 +160,9 @@ ${editor:fileExtname}
 
 ${editor:lines}
 # Output: e.g. #12 or #12-14 (the default format)
+
+${editor:currentCommit}
+# Output: e.g. 6081948371a180586a806a214202e44c2f922a42
 ```
 
 #### `match`
@@ -195,7 +199,7 @@ This category provides some standard regex templates to use. This will be subsit
         },
         {
             "pattern": "${editor:file}",
-            "output": "https://host.example.com/repo/${editor:relativeFile}${editor:lines}",
+            "output": "https://host.example.com/repo/blob/${editor.currentCommit}/${editor:relativeFile}${editor:lines}",
             "lineSeparator": "#",
             "linePrefix": "L"
         }
