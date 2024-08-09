@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.1 - 2024-08-09
+
+### Added
+
+- Added a new editor variable, `${editor:currentCommit}`, which will return the current commit hash of the current open file
+
 ## 0.3.0 - 2022-03-18
 
 ### Added
