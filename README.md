@@ -1,6 +1,6 @@
 # vscode-open
 
-[![VS Marketplace version](https://vsmarketplacebadges.dev/version/alexander-yu.vscode-open.svg)](https://marketplace.visualstudio.com/items?itemName=alexander-yu.vscode-open) [![GitHub license](https://img.shields.io/github/license/alexander-yu/vscode-open.svg)](https://github.com/alexander-yu/vscode-open/blob/master/LICENSE)
+[![VS Marketplace version](https://vsmarketplacebadges.dev/version-short/alexander-yu.vscode-open.svg)](https://marketplace.visualstudio.com/items?itemName=alexander-yu.vscode-open) ![Installs](https://vsmarketplacebadges.dev/installs-short/alexander-yu.vscode-open.svg) ![Downloads](https://vsmarketplacebadges.dev/downloads-short/alexander-yu.vscode-open.svg) [![GitHub license](https://img.shields.io/github/license/alexander-yu/vscode-open.svg)](https://github.com/alexander-yu/vscode-open/blob/master/LICENSE)
 
 This is a [Visual Studio Code](https://code.visualstudio.com/) extension for opening files in your browser, or vice versa.
 
